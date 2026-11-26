@@ -50,3 +50,17 @@ catch (ArgumentException ex)
 {
     Console.WriteLine("Palabra vacía rechazada: " + ex.Message);
 }
+
+Console.WriteLine();
+Console.WriteLine("Factorial de 0: " + Funciones.Factorial(0));
+Console.WriteLine("Factorial de 5: " + Funciones.Factorial(5));
+Console.WriteLine("Factorial de 10: " + Funciones.Factorial(10));
+
+try
+{
+    Funciones.Factorial(-3);
+}
+catch (ArgumentOutOfRangeException ex)
+{
+    Console.WriteLine("Factorial de -3 rechazado: " + ex.Message);
+}

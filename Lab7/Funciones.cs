@@ -73,4 +73,28 @@ public static class Funciones
 
         return actual + ContarArchivosConPalabra(entregas, palabra, indice + 1);
     }
+
+    // Calcula n! de forma recursiva.
+    // n <= 1 -> devuelve 1.
+    // n * Factorial(n - 1).
+    // Se limita a 20 porque 21! ya no cabe en un long. "desbordamiento".
+    public static long Factorial(int n)
+    {
+        if (n < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(n), "El factorial no está definido para números negativos.");
+        }
+
+        if (n > 20)
+        {
+            throw new ArgumentOutOfRangeException(nameof(n), "El máximo permitido es 20 (con más se desborda el tipo long).");
+        }
+
+        if (n <= 1)
+        {
+            return 1;
+        }
+
+        return n * Factorial(n - 1);
+    }
 }
