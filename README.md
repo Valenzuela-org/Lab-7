@@ -109,8 +109,6 @@ Las pruebas se ejecutan desde la opción 7 del menú.
 - **Exceso de llamadas:** el factorial se limita a `n <= 20`, porque desde 21! el resultado ya no cabe en un `long`. Además, cada llamada recursiva queda pendiente en la pila de memoria.
 - **Búsqueda o palabra vacía:** `Contains("")` es verdadero para cualquier texto, así que una palabra vacía contaría todos los archivos. Se valida antes de buscar o contar.
 - **Dificultad de depuración:** hay que seguir varias llamadas abiertas a la vez; por eso cada función tiene su caso base y recursivo comentados en el código.
-- [COMPLETAR: agrega aquí cualquier error real que hayas tenido al programar y cómo lo corregiste]
-
 ## Análisis de resultados
 
 ### Reflexión técnica
