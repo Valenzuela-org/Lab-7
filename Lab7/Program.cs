@@ -35,3 +35,18 @@ catch (ArgumentException ex)
 {
     Console.WriteLine("Búsqueda vacía rechazada: " + ex.Message);
 }
+
+Console.WriteLine();
+Console.WriteLine("Archivos con 'final': " + Funciones.ContarArchivosConPalabra(entregas, "final"));
+Console.WriteLine("Archivos con 'v2': " + Funciones.ContarArchivosConPalabra(entregas, "v2"));
+Console.WriteLine("Archivos con 'xyz' (ninguno): " + Funciones.ContarArchivosConPalabra(entregas, "xyz"));
+Console.WriteLine("Conteo en lista vacía: " + Funciones.ContarArchivosConPalabra(new List<Entrega>(), "final"));
+
+try
+{
+    Funciones.ContarArchivosConPalabra(entregas, "");
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine("Palabra vacía rechazada: " + ex.Message);
+}

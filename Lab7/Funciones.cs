@@ -48,4 +48,29 @@ public static class Funciones
 
         return BuscarCodigo(entregas, codigo, indice + 1);
     }
+
+    // Cuenta cuántos nombres de archivo contienen la palabra clave.
+    // Indice >= Count -> no quedan entregas, conteo 0.
+    // (1 si el archivo actual contiene la palabra, 0 si no) + conteo del resto.
+    public static int ContarArchivosConPalabra(List<Entrega> entregas, string palabra, int indice = 0)
+    {
+        if (entregas == null)
+        {
+            throw new ArgumentNullException(nameof(entregas), "La lista de entregas no puede ser nula.");
+        }
+
+        if (string.IsNullOrWhiteSpace(palabra))
+        {
+            throw new ArgumentException("La palabra clave no puede estar vacía.", nameof(palabra));
+        }
+
+        if (indice >= entregas.Count)
+        {
+            return 0;
+        }
+
+        int actual = entregas[indice].NombreArchivo.Contains(palabra.Trim(), StringComparison.OrdinalIgnoreCase) ? 1 : 0;
+
+        return actual + ContarArchivosConPalabra(entregas, palabra, indice + 1);
+    }
 }
