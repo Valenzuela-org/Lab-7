@@ -12,70 +12,114 @@ List<Entrega> entregas = new List<Entrega>
     new Entrega("N2024008", "practica7.py",          1, 16.0, "Sin observaciones"),
 };
 
-Console.WriteLine("Entregas registradas: " + entregas.Count);
-foreach (Entrega e in entregas)
+int opcion = -1;
+
+while (opcion != 0)
 {
-    Console.WriteLine($"{e.Codigo} | {e.NombreArchivo} | intentos: {e.Intentos} | puntaje: {e.Puntaje}");
+    Console.WriteLine();
+    Console.WriteLine("===== ANÁLISIS DE ENTREGAS DIGITALES =====");
+    Console.WriteLine("1. Listar entregas");
+    Console.WriteLine("2. Sumatoria de puntajes (recursiva)");
+    Console.WriteLine("3. Buscar código de estudiante (recursiva)");
+    Console.WriteLine("4. Contar archivos con palabra clave (recursiva)");
+    Console.WriteLine("5. Factorial (recursiva)");
+    Console.WriteLine("6. Comparar recursiva vs. iterativa");
+    Console.WriteLine("7. Ejecutar pruebas");
+    Console.WriteLine("0. Salir");
+    Console.Write("Elige una opción: ");
+
+    string? entrada = Console.ReadLine();
+
+    if (!int.TryParse(entrada, out opcion))
+    {
+        opcion = -1;
+        Console.WriteLine("Opción inválida: escribe un número del menú.");
+        continue;
+    }
+
+    switch (opcion)
+    {
+        case 1:
+            foreach (Entrega e in entregas)
+            {
+                Console.WriteLine($"{e.Codigo} | {e.NombreArchivo} | intentos: {e.Intentos} | puntaje: {e.Puntaje} | {e.Observaciones}");
+            }
+            break;
+
+        case 2:
+            Console.WriteLine("Sumatoria de puntajes: " + Funciones.SumarPuntajes(entregas));
+            break;
+
+        case 3:
+            Console.Write("Código a buscar: ");
+            string? codigo = Console.ReadLine();
+            try
+            {
+                int pos = Funciones.BuscarCodigo(entregas, codigo ?? "");
+                if (pos == -1)
+                {
+                    Console.WriteLine("El código no existe en la lista.");
+                }
+                else
+                {
+                    Console.WriteLine($"Encontrado en la posición {pos}: {entregas[pos].NombreArchivo}");
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            break;
+
+        case 4:
+            Console.Write("Palabra clave (ej. final, v2): ");
+            string? palabra = Console.ReadLine();
+            try
+            {
+                int total = Funciones.ContarArchivosConPalabra(entregas, palabra ?? "");
+                Console.WriteLine($"Archivos que contienen '{palabra}': {total}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            break;
+
+        case 5:
+            Console.Write("Número para el factorial (0 a 20): ");
+            if (int.TryParse(Console.ReadLine(), out int n))
+            {
+                try
+                {
+                    Console.WriteLine($"{n}! = {Funciones.Factorial(n)}");
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Error: debes escribir un número entero.");
+            }
+            break;
+
+        case 6:
+            Console.WriteLine($"Sumatoria -> recursiva: {Funciones.SumarPuntajes(entregas)} | iterativa: {Funciones.SumarPuntajesIterativo(entregas)}");
+            Console.WriteLine($"Búsqueda U2024004 -> recursiva: {Funciones.BuscarCodigo(entregas, "U2024004")} | iterativa: {Funciones.BuscarCodigoIterativo(entregas, "U2024004")}");
+            Console.WriteLine($"Conteo 'final' -> recursiva: {Funciones.ContarArchivosConPalabra(entregas, "final")} | iterativa: {Funciones.ContarArchivosConPalabraIterativo(entregas, "final")}");
+            break;
+
+        case 7:
+            Pruebas.Ejecutar(entregas);
+            break;
+
+        case 0:
+            Console.WriteLine("Programa finalizado.");
+            break;
+
+        default:
+            Console.WriteLine("Opción inválida: elige un número entre 0 y 7.");
+            break;
+    }
 }
-
-Console.WriteLine();
-Console.WriteLine("Sumatoria recursiva de puntajes: " + Funciones.SumarPuntajes(entregas));
-Console.WriteLine("Sumatoria con lista vacía: " + Funciones.SumarPuntajes(new List<Entrega>()));
-
-Console.WriteLine();
-Console.WriteLine("Buscar N2024004 (existe): posición " + Funciones.BuscarCodigo(entregas, "N2024004"));
-Console.WriteLine("Buscar N9999999 (no existe): posición " + Funciones.BuscarCodigo(entregas, "N9999999"));
-Console.WriteLine("Buscar en lista vacía: posición " + Funciones.BuscarCodigo(new List<Entrega>(), "N2024001"));
-
-try
-{
-    Funciones.BuscarCodigo(entregas, "   ");
-}
-catch (ArgumentException ex)
-{
-    Console.WriteLine("Búsqueda vacía rechazada: " + ex.Message);
-}
-
-Console.WriteLine();
-Console.WriteLine("Archivos con 'final': " + Funciones.ContarArchivosConPalabra(entregas, "final"));
-Console.WriteLine("Archivos con 'v2': " + Funciones.ContarArchivosConPalabra(entregas, "v2"));
-Console.WriteLine("Archivos con 'xyz' (ninguno): " + Funciones.ContarArchivosConPalabra(entregas, "xyz"));
-Console.WriteLine("Conteo en lista vacía: " + Funciones.ContarArchivosConPalabra(new List<Entrega>(), "final"));
-
-try
-{
-    Funciones.ContarArchivosConPalabra(entregas, "");
-}
-catch (ArgumentException ex)
-{
-    Console.WriteLine("Palabra vacía rechazada: " + ex.Message);
-}
-
-Console.WriteLine();
-Console.WriteLine("Factorial de 0: " + Funciones.Factorial(0));
-Console.WriteLine("Factorial de 5: " + Funciones.Factorial(5));
-Console.WriteLine("Factorial de 10: " + Funciones.Factorial(10));
-
-try
-{
-    Funciones.Factorial(-3);
-}
-catch (ArgumentOutOfRangeException ex)
-{
-    Console.WriteLine("Factorial de -3 rechazado: " + ex.Message);
-}
-
-Console.WriteLine();
-Console.WriteLine("--- Comparación recursiva vs. iterativa ---");
-
-double sumaRec = Funciones.SumarPuntajes(entregas);
-double sumaIter = Funciones.SumarPuntajesIterativo(entregas);
-Console.WriteLine($"Sumatoria -> recursiva: {sumaRec} | iterativa: {sumaIter} | iguales: {sumaRec == sumaIter}");
-
-int busRec = Funciones.BuscarCodigo(entregas, "U2024004");
-int busIter = Funciones.BuscarCodigoIterativo(entregas, "U2024004");
-Console.WriteLine($"Búsqueda U2024004 -> recursiva: {busRec} | iterativa: {busIter} | iguales: {busRec == busIter}");
-
-int conRec = Funciones.ContarArchivosConPalabra(entregas, "final");
-int conIter = Funciones.ContarArchivosConPalabraIterativo(entregas, "final");
-Console.WriteLine($"Conteo 'final' -> recursiva: {conRec} | iterativa: {conIter} | iguales: {conRec == conIter}");
