@@ -21,3 +21,17 @@ foreach (Entrega e in entregas)
 Console.WriteLine();
 Console.WriteLine("Sumatoria recursiva de puntajes: " + Funciones.SumarPuntajes(entregas));
 Console.WriteLine("Sumatoria con lista vacía: " + Funciones.SumarPuntajes(new List<Entrega>()));
+
+Console.WriteLine();
+Console.WriteLine("Buscar N2024004 (existe): posición " + Funciones.BuscarCodigo(entregas, "N2024004"));
+Console.WriteLine("Buscar N9999999 (no existe): posición " + Funciones.BuscarCodigo(entregas, "N9999999"));
+Console.WriteLine("Buscar en lista vacía: posición " + Funciones.BuscarCodigo(new List<Entrega>(), "N2024001"));
+
+try
+{
+    Funciones.BuscarCodigo(entregas, "   ");
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine("Búsqueda vacía rechazada: " + ex.Message);
+}
