@@ -15,14 +15,14 @@ public static class Pruebas
         Probar("Caso recursivo simple", "Factorial(5)", "120",
             () => Funciones.Factorial(5).ToString());
 
-        Probar("Lista vacía", "Buscar N2024001 en lista vacía", "-1",
-            () => Funciones.BuscarCodigo(new List<Entrega>(), "N2024001").ToString());
+        Probar("Lista vacía", "Buscar U2024001 en lista vacía", "-1",
+            () => Funciones.BuscarCodigo(new List<Entrega>(), "U2024001").ToString());
 
-        Probar("Código existente", "Buscar N2024004", "3",
-            () => Funciones.BuscarCodigo(entregas, "N2024004").ToString());
+        Probar("Código existente", "Buscar U2024004", "3",
+            () => Funciones.BuscarCodigo(entregas, "U2024004").ToString());
 
-        Probar("Código inexistente", "Buscar N9999999", "-1",
-            () => Funciones.BuscarCodigo(entregas, "N9999999").ToString());
+        Probar("Código inexistente", "Buscar U9999999", "-1",
+            () => Funciones.BuscarCodigo(entregas, "U9999999").ToString());
 
         Probar("Comparación iterativa", "Sumatoria recursiva vs. iterativa", "iguales",
             () => Funciones.SumarPuntajes(entregas) == Funciones.SumarPuntajesIterativo(entregas) ? "iguales" : "distintos");
