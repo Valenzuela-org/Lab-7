@@ -17,3 +17,7 @@ foreach (Entrega e in entregas)
 {
     Console.WriteLine($"{e.Codigo} | {e.NombreArchivo} | intentos: {e.Intentos} | puntaje: {e.Puntaje}");
 }
+
+Console.WriteLine();
+Console.WriteLine("Sumatoria recursiva de puntajes: " + Funciones.SumarPuntajes(entregas));
+Console.WriteLine("Sumatoria con lista vacía: " + Funciones.SumarPuntajes(new List<Entrega>()));
