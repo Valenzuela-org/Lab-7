@@ -64,3 +64,18 @@ catch (ArgumentOutOfRangeException ex)
 {
     Console.WriteLine("Factorial de -3 rechazado: " + ex.Message);
 }
+
+Console.WriteLine();
+Console.WriteLine("--- Comparación recursiva vs. iterativa ---");
+
+double sumaRec = Funciones.SumarPuntajes(entregas);
+double sumaIter = Funciones.SumarPuntajesIterativo(entregas);
+Console.WriteLine($"Sumatoria -> recursiva: {sumaRec} | iterativa: {sumaIter} | iguales: {sumaRec == sumaIter}");
+
+int busRec = Funciones.BuscarCodigo(entregas, "U2024004");
+int busIter = Funciones.BuscarCodigoIterativo(entregas, "U2024004");
+Console.WriteLine($"Búsqueda U2024004 -> recursiva: {busRec} | iterativa: {busIter} | iguales: {busRec == busIter}");
+
+int conRec = Funciones.ContarArchivosConPalabra(entregas, "final");
+int conIter = Funciones.ContarArchivosConPalabraIterativo(entregas, "final");
+Console.WriteLine($"Conteo 'final' -> recursiva: {conRec} | iterativa: {conIter} | iguales: {conRec == conIter}");

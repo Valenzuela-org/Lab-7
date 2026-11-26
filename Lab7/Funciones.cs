@@ -97,4 +97,70 @@ public static class Funciones
 
         return n * Factorial(n - 1);
     }
+
+    // Un for acumula los puntajes en "suma".
+    public static double SumarPuntajesIterativo(List<Entrega> entregas)
+    {
+        if (entregas == null)
+        {
+            throw new ArgumentNullException(nameof(entregas), "La lista de entregas no puede ser nula.");
+        }
+
+        double suma = 0;
+        for (int i = 0; i < entregas.Count; i++)
+        {
+            suma += entregas[i].Puntaje;
+        }
+
+        return suma;
+    }
+
+    // Devuelve la posición o -1 si no existe.
+    public static int BuscarCodigoIterativo(List<Entrega> entregas, string codigo)
+    {
+        if (entregas == null)
+        {
+            throw new ArgumentNullException(nameof(entregas), "La lista de entregas no puede ser nula.");
+        }
+
+        if (string.IsNullOrWhiteSpace(codigo))
+        {
+            throw new ArgumentException("El código a buscar no puede estar vacío.", nameof(codigo));
+        }
+
+        for (int i = 0; i < entregas.Count; i++)
+        {
+            if (string.Equals(entregas[i].Codigo, codigo.Trim(), StringComparison.OrdinalIgnoreCase))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    // Suma 1 al contador por cada archivo que contiene la palabra.
+    public static int ContarArchivosConPalabraIterativo(List<Entrega> entregas, string palabra)
+    {
+        if (entregas == null)
+        {
+            throw new ArgumentNullException(nameof(entregas), "La lista de entregas no puede ser nula.");
+        }
+
+        if (string.IsNullOrWhiteSpace(palabra))
+        {
+            throw new ArgumentException("La palabra clave no puede estar vacía.", nameof(palabra));
+        }
+
+        int conteo = 0;
+        for (int i = 0; i < entregas.Count; i++)
+        {
+            if (entregas[i].NombreArchivo.Contains(palabra.Trim(), StringComparison.OrdinalIgnoreCase))
+            {
+                conteo++;
+            }
+        }
+
+        return conteo;
+    }
 }
